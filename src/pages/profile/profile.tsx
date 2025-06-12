@@ -2,7 +2,7 @@ import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { Preloader } from '@ui';
 
-import { useSelector, useDispatch } from '../../services/store';
+import { useSelector, useDispatch } from '@store';
 import {
   getUser,
   getUserState,
@@ -28,10 +28,10 @@ export const Profile: FC = () => {
   useEffect(() => {
     setFormValue((prevState) => ({
       ...prevState,
-      name: user?.name || '',
-      email: user?.email || ''
+      name: user.name || '',
+      email: user.email || ''
     }));
-  }, [user]);
+  }, [data]);
 
   const isFormChanged =
     formValue.name !== user?.name ||

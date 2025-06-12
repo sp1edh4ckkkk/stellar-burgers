@@ -3,7 +3,7 @@ import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useNavigate } from 'react-router-dom';
 
-import { useSelector, useDispatch } from '../../services/store';
+import { useSelector, useDispatch } from '@store';
 import {
   getConstructorState,
   orderBurger,
@@ -16,7 +16,7 @@ export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   const { constructorItems, orderModalData, orderRequest } =
     useSelector(getConstructorState);
-  const isAuthenticated = useSelector(getUserState).isAuthenticated;
+  const isAuth = useSelector(getUserState).isAuthenticated;
   const dispatch = useDispatch();
 
   let arr: string[] = [];
@@ -30,12 +30,14 @@ export const BurgerConstructor: FC = () => {
   }
 
   const onOrderClick = () => {
-    if (isAuthenticated && !constructorItems.bun) {
+    if (isAuth && constructorItems.bun) {
       dispatch(setRequest(true));
       dispatch(orderBurger(arr));
+    } else if (isAuth && !constructorItems.bun) {
+      return;
+    } else if (!isAuth) {
+      navigate('/login');
     }
-    if (isAuthenticated && constructorItems.bun) return;
-    if (!isAuthenticated) return navigate('/login');
   };
   const closeOrderModal = () => {
     dispatch(setRequest(false));
