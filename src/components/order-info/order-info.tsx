@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
-import { useSelector, useDispatch } from '../../services/store';
+import { useSelector, useDispatch } from '@store';
 import {
   getOrderByNumber,
   getOrderState
