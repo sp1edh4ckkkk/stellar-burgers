@@ -1,6 +1,5 @@
 import Cypress from 'cypress';
 
-const BASE_URL = 'https://norma.nomoreparties.space/api';
 const ID_BUN = `[data-cy=${'643d69a5c3f7b9001cfa093c'}]`;
 const ID_ANOTHER_BUN = `[data-cy=${'643d69a5c3f7b9001cfa093d'}]`;
 const ID_FILLING = `[data-cy=${'643d69a5c3f7b9001cfa0941'}]`;
@@ -8,16 +7,16 @@ const ID_SAUCE = `[data-cy=${'643d69a5c3f7b9001cfa0945'}]`;
 const ID_MAIN = `[data-cy=${'643d69a5c3f7b9001cfa0946'}]`;
 
 beforeEach(() => {
-  cy.intercept('GET', `${BASE_URL}/ingredients`, {
+  cy.intercept('GET', `api/ingredients`, {
     fixture: 'ingredients.json'
   });
-  cy.intercept('POST', `${BASE_URL}/auth/login`, {
+  cy.intercept('POST', `api/auth/login`, {
     fixture: 'user.json'
   });
-  cy.intercept('GET', `${BASE_URL}/auth/user`, {
+  cy.intercept('GET', `api/auth/user`, {
     fixture: 'user.json'
   });
-  cy.intercept('POST', `${BASE_URL}/orders`, {
+  cy.intercept('POST', `api/orders`, {
     fixture: 'orders.json'
   });
   cy.visit('/');
